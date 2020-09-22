@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.vaadin.event.ShortcutAction;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -48,10 +49,19 @@ public class TodoUI extends UI {
         formLayout.addComponentsAndExpand(task);
         formLayout.addComponents(add);
 
+        add.addClickListener(click -> {
+            todoLayout.add(new Todo(task.getValue()));
+            task.clear();
+            task.focus();
+        });
+        task.focus();
+        add.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+
         root.addComponent(formLayout);
     }
 
     private void addTodoList() {
+        todoLayout.setWidth("80%");
         root.addComponent(todoLayout);
     }
 
