@@ -31,4 +31,9 @@ public class TodoLayout extends VerticalLayout {
     private void update() {
         setTodos(repo.findAll());
     }
+
+    public void deleteCompleted() {
+        repo.deleteByDone(true);
+        update();
+    }
 }
